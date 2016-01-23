@@ -6,6 +6,7 @@
 		<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="index.css">
 		<script type="text/javascript">
+		SKIPPED_BARS = 64;
 		MAX_BARS = 256;
 		FREQUENCIES = [];
 		var audioCtx;
@@ -22,7 +23,7 @@
 			var bufferLength = analyser.frequencyBinCount;
 			var dataArray = new Uint8Array(bufferLength);
 			analyser.getByteFrequencyData(dataArray);
-			for (var i = 0; i < MAX_BARS; i++) {
+			for (var i = 0; i < MAX_BARS-SKIPPED_BARS; i++) {
 				var currentBar = document.getElementById("bar" + i);
 				currentBar.style.height = (analyseAverage(Math.floor((1/MAX_BARS)*bufferLength*i), Math.floor((1/MAX_BARS)*bufferLength*(i+1)), dataArray)/255)*window.innerHeight + "px";
 			}
@@ -30,19 +31,19 @@
 
 		function init() {
 			//add bars
-			for (var i = 0; i < MAX_BARS; i++) {
+			for (var i = 0; i < MAX_BARS-SKIPPED_BARS; i++) {
 				var bar = document.createElement("div");
 				bar.className = "bar";
 				bar.id = "bar" + i;
-				bar.style.left = ((i/MAX_BARS)*100) + "%";
-				bar.style.width = ((1/MAX_BARS)*100) + "%";
+				bar.style.left = ((i/(MAX_BARS-SKIPPED_BARS))*100) + "%";
+				bar.style.width = ((1/(MAX_BARS-SKIPPED_BARS))*100) + "%";
 				document.getElementById("bars").appendChild(bar);
 			}
 			//init audio
 			navigator.mediaDevices.getUserMedia({audio: true}).then(function (micStream) {
 				audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 				analyser = audioCtx.createAnalyser();
-				analyser.fftSize = 4096; //max frequency that it goes to
+				analyser.fftSize = 1024; //max frequency that it goes to
 				source = audioCtx.createMediaStreamSource(micStream);
 				source.connect(analyser);
 				setInterval(vizualize, 50);
@@ -54,6 +55,15 @@
 		<h1 class="hype">
 			Welcome to the party!
 		</h1>
+		<div class="cube" style="display:none;">
+			<div name="front" class="side"></div>
+			<div name="left" class="side"></div>
+			<div name="right" class="side"></div>
+			<div name="top" class="side"></div>
+			<div name="bottom" class="side"></div>
+			<div name="back" class="side"></div>
+		</div>
+		<img class="banana" src="banana0.png"/>
 		<img class="overlay" src="overlay.svg"/>
 		<div id="bars">
 		</div>

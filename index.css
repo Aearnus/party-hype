@@ -34,3 +34,40 @@ body {
 	z-index: -1;
 	mix-blend-mode: multiply;
 }
+
+@keyframes rotate3d {
+	from {
+		transform: rotateY(500deg) rotateX(500deg);
+	}
+	to {
+		transform: rotateY(-500deg) rotateX(-500deg);
+	}
+}
+
+.banana {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	perspective: 20em;
+	transform: translateX(-50%) translateY(-50%);
+	animation: rotate3d 2s linear infinite;
+	z-index: 99;
+}
+
+.cube {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	perspective: 20em;
+	transform-style: preserve-3d;
+	transform: translateX(-50%) translateY(-50%);
+	animation: rotate3d 2s linear infinite;
+	z-index: 99;
+}
+
+.side {
+	background: #0000FF;
+	margin: 3px black;
+	width: 30px;
+	height: 30px;
+}
