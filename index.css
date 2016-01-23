@@ -1,0 +1,36 @@
+body {
+	background: #000000;
+	overflow: hidden;
+}
+
+.hype {
+	font-family: 'Lobster', cursive;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: 50%;
+	transform: translateY(-100%);
+	font-size: 8em;
+	color: #FFFFFF;
+	z-index: 100;
+}
+
+.bar {
+	position: absolute;
+	bottom: 0;
+	height: 20px;
+	transition: height 0.1s;
+	background: #FFFFFF;
+	z-index: -2;
+}
+
+.overlay {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+	z-index: -1;
+	mix-blend-mode: multiply;
+}
