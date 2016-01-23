@@ -35,22 +35,20 @@ body {
 	mix-blend-mode: multiply;
 }
 
-@keyframes rotate3d {
+@keyframes boom {
 	from {
-		transform: rotateY(500deg) rotateX(500deg);
+		transform: scale(0.6) rotate(-40deg);
 	}
 	to {
-		transform: rotateY(-500deg) rotateX(-500deg);
+		transform: scale(0.5) rotate(-40deg);
 	}
 }
 
 .banana {
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	perspective: 20em;
-	transform: translateX(-50%) translateY(-50%);
-	animation: rotate3d 2s linear infinite;
+	top: 12%;
+	left: 35%;
+	animation: 1.5s linear 0s infinite alternate both running boom;
 	z-index: 99;
 }
 
